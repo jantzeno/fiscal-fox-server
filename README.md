@@ -1,5 +1,10 @@
 # Fiscal Fox SQLite RESTful API
 
+## Tested Using
+
+- Node.js, v14.8.0
+- npm, v6.14.7
+
 ## What You Will Need
 
 1. SQLite3
