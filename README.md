@@ -7,7 +7,7 @@
 Ubuntu/Debian:
 
 ```bash
-sudo apt intall sqlite3
+sudo apt install sqlite3
 ```
 
 MacOS with Homebrew:
