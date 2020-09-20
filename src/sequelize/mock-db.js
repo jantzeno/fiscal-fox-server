@@ -3,6 +3,9 @@ const { BudgetModel } = require("./models/budget.model.js");
 const { ExpenseModel } = require("./models/expense.model.js");
 const { UserModel } = require("./models/user.model.js");
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 async function mock() {
   console.log("Loading mock data into SQLite database");
 
@@ -11,13 +14,13 @@ async function mock() {
   await UserModel.bulkCreate([
     {
       username: "mrfox",
-      password: "incredible",
+      password: bcrypt.hashSync("incredible", saltRounds),
       email: "mrfox@burrow.com",
       role: "PROGRAM_MANAGER",
     },
     {
       username: "boggis",
-      password: "farmer",
+      password: bcrypt.hashSync("farmer", saltRounds),
       email: "boggis@squabfarm.com",
       role: "BUDGET_ANALYST",
     },

@@ -3,6 +3,7 @@ const express = require("express");
 // const createError = require("http-errors");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const middleware = require("./middleware/errors.middleware.js");
 
 // Server Setup
@@ -23,6 +24,9 @@ const userRoutes = require("./routes/users.routes.js");
 //   .then(() => console.log("Database Sync'd"))
 //   .catch((error) => console.log("Database error: ", error));
 
+// Allow localhost server calls from browser
+app.use(cors());
+
 // Log requests to console
 app.use(logger(logLevel));
 
@@ -31,10 +35,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Handle Routes
-app.use("/auth", authRoutes);
-app.use("/budgets", budgetsRoutes);
-app.use("/expenses", expensesRoutes);
-app.use("/user", userRoutes);
+const BASE_URL = "/api";
+app.use(`${BASE_URL}/auth`, authRoutes);
+app.use(`${BASE_URL}/budgets`, budgetsRoutes);
+app.use(`${BASE_URL}/expenses`, expensesRoutes);
+app.use(`${BASE_URL}/user`, userRoutes);
 
 // Handle Errors, 404 and 500
 app.use(middleware.error404);
@@ -42,5 +47,5 @@ app.use(middleware.error500);
 
 // Start server and listen on port
 app.listen(port, function () {
-  console.log("Fiscal-Fox server running on port: ${port}...");
+  console.log(`Fiscal-Fox server running on port: ${port}...`);
 });
