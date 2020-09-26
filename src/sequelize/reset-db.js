@@ -10,7 +10,7 @@ async function reset() {
   await BudgetModel.drop();
   await ExpenseModel.drop();
 
-  // Reset the database - TESTING
+  // Reset the database
   await connection
     .sync({ force: true })
     .then(() => console.log("Reset Database"))

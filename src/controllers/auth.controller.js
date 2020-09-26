@@ -1,4 +1,5 @@
 const { UserModel } = require("../sequelize/models/user.model.js");
+const { validationResult } = require("express-validator");
 const { secret } = require("../config/auth.config.js");
 const bcrypt = require("bcrypt");
 
@@ -6,6 +7,10 @@ var jwt = require("jsonwebtoken");
 
 exports.register = (req, res) => {
   console.log("Request - Register User");
+  // const validation = validationResult(req);
+  // if (!validation.isEmpty()) {
+  //   return res.status(422).json({ errors: validation.array() });
+  // }
   // Save User to Database
   UserModel.create({
     username: req.body.username,
@@ -16,7 +21,7 @@ exports.register = (req, res) => {
   })
     .then((user) => {
       if (user) {
-        res.status(201).send("Registration Successful.");
+        res.status(201).send({ status: true });
       }
     })
     .catch((err) => {
@@ -34,7 +39,7 @@ exports.login = (req, res) => {
     // Check username
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        res.status(404).send({ message: "User Not found." });
       }
 
       //Check password
@@ -44,7 +49,7 @@ exports.login = (req, res) => {
       );
 
       if (!passwordIsValid) {
-        return res.status(401).send({
+        res.status(401).send({
           accessToken: null,
           message: "Invalid Credentials",
         });
@@ -59,7 +64,6 @@ exports.login = (req, res) => {
 
       // Respond
       res.status(200).send({
-        id: user.id,
         username: user.username,
         email: user.email,
         role: user.role,

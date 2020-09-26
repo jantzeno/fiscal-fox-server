@@ -9,6 +9,11 @@ const saltRounds = 10;
 async function mock() {
   console.log("Loading mock data into SQLite database");
 
+  // Drop Tables
+  await UserModel.drop();
+  await BudgetModel.drop();
+  await ExpenseModel.drop();
+
   await connection.sync({ force: true });
 
   await UserModel.bulkCreate([

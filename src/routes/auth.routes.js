@@ -7,15 +7,17 @@ const {
   checkDuplicateEmail,
   checkDuplicateUserName,
 } = require("../middleware/register.middleware.js");
+const { check } = require("express-validator");
 const express = require("express");
+const { verifyToken } = require("../middleware/authJwt.middleware");
 
 const authRoutes = express.Router();
 
 authRoutes.post("/login", login);
-authRoutes.post("/logout", logout);
+authRoutes.post("/logout", verifyToken, logout);
 authRoutes.post(
   "/register",
-  [checkDuplicateUserName, checkDuplicateEmail],
+  [check("email").isEmail(), checkDuplicateUserName, checkDuplicateEmail],
   register
 );
 

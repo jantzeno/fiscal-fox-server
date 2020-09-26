@@ -1,8 +1,6 @@
 // Modules
 const express = require("express");
-// const createError = require("http-errors");
 const logger = require("morgan");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const middleware = require("./middleware/errors.middleware.js");
 
@@ -31,8 +29,8 @@ app.use(cors());
 app.use(logger(logLevel));
 
 // Parse incoming requests
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Handle Routes
 const BASE_URL = "/api";
