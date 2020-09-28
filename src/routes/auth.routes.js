@@ -14,7 +14,7 @@ const { verifyToken } = require("../middleware/authJwt.middleware");
 const authRoutes = express.Router();
 
 authRoutes.post("/login", login);
-authRoutes.post("/logout", verifyToken, logout);
+authRoutes.get("/logout", verifyToken, logout);
 authRoutes.post(
   "/register",
   [check("email").isEmail(), checkDuplicateUserName, checkDuplicateEmail],

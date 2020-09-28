@@ -30,7 +30,14 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
+  const errorMsg = "Invalid Request.";
   console.log("Request - Login");
+
+  // Missing login data, do nothing
+  if (!req.body.username || !req.body.password) {
+    return res.status(400).send({ message: errorMsg });
+  }
+  // Check for user
   UserModel.findOne({
     where: {
       username: req.body.username,
@@ -39,7 +46,8 @@ exports.login = (req, res) => {
     // Check username
     .then((user) => {
       if (!user) {
-        res.status(404).send({ message: "User Not found." });
+        // If none was found, return generic error
+        return res.status(400).send({ message: errorMsg });
       }
 
       //Check password
@@ -51,16 +59,19 @@ exports.login = (req, res) => {
       if (!passwordIsValid) {
         res.status(401).send({
           accessToken: null,
-          message: "Invalid Credentials",
+          message: errorMsg,
         });
       }
 
       // Generate token
-      var accessToken = jwt.sign(
-        { id: user.id },
-        secret,
-        { expiresIn: 86400 } // 24 hours
-      );
+      var accessToken =
+        "Bearer" +
+        " " +
+        jwt.sign(
+          { id: user.id },
+          secret,
+          { expiresIn: 86400 } // 24 hours
+        );
 
       // Respond
       res.status(200).send({
@@ -76,5 +87,6 @@ exports.login = (req, res) => {
 };
 
 exports.logout = function (req, res) {
+  // Log the request
   console.log("Request - Logout");
 };

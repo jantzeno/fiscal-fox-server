@@ -7,8 +7,18 @@ exports.getAllExpenses = (req, res) => {
 
   ExpenseModel.findAll()
     .then((expenses) => {
+      let expenseRes = [];
       if (expenses) {
-        res.status(200).send({ expenses: expenses });
+        for (expense of expenses) {
+          expenseRes.push({
+            id: expense.id,
+            budgetId: expense.budget_id,
+            name: expense.name,
+            amount: expense.amount,
+          });
+        }
+
+        res.status(200).send({ expenses: expenseRes });
       } else {
         res.status(204).send({ expenses: [] });
       }
@@ -26,8 +36,17 @@ exports.getAllExpensesByBudget = (req, res) => {
     where: { budget_id: Number(req.params.budgetId) },
   })
     .then((expenses) => {
+      let expenseRes = [];
       if (expenses) {
-        res.status(200).send({ expenses: expenses });
+        for (expense of expenses) {
+          expenseRes.push({
+            id: expense.id,
+            budgetId: expense.budget_id,
+            name: expense.name,
+            amount: expense.amount,
+          });
+        }
+        res.status(200).send({ expenses: expenseRes });
       } else {
         res.status(204).send({ expenses: [] });
       }
@@ -45,7 +64,12 @@ exports.getExpense = (req, res) => {
     ExpenseModel.findByPk(expenseId)
       .then((expense) => {
         if (expense) {
-          res.status(200).send({ expense });
+          res.status(200).send({
+            id: expense.id,
+            budgetId: expense.budget_id,
+            name: expense.name,
+            amount: expense.amount,
+          });
         } else {
           res.status(204).send({ expense: null });
         }
@@ -65,7 +89,12 @@ exports.createExpense = (req, res) => {
   })
     .then((expense) => {
       if (expense) {
-        res.status(201).send({ expense });
+        res.status(201).send({
+          id: expense.id,
+          budgetId: expense.budget_id,
+          name: expense.name,
+          amount: expense.amount,
+        });
       }
     })
     .catch((err) => {
@@ -89,7 +118,14 @@ exports.updateExpense = (req, res) => {
   )
     .then((expense) => {
       if (expense) {
-        res.status(200).send({ expense });
+        res
+          .status(200)
+          .send({
+            id: expense.id,
+            budgetId: expense.budget_id,
+            name: expense.name,
+            amount: expense.amount,
+          });
       }
     })
     .catch((err) => {

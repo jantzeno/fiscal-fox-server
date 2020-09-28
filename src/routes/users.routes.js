@@ -22,6 +22,6 @@ userRoutes
  * Routes for a user by id. User id is pulled from passed JWT token.
  * Evalutes to `/user/update_security`.
  */
-userRoutes.put("/update_security:newPassword", verifyToken, updatePassword);
+userRoutes.put("/update_security/:newPassword", verifyToken, updatePassword);
 
 module.exports = userRoutes;

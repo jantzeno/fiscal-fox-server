@@ -11,7 +11,11 @@ exports.getUser = (req, res) => {
         if (user) {
           // Filter out password
           user.password = undefined;
-          res.status(200).send({ user });
+          res.status(200).send({
+            username: user.username,
+            email: user.email,
+            role: user.role,
+          });
         } else {
           res.status(204).send({ user: null });
         }
@@ -41,7 +45,13 @@ exports.updateUser = (req, res) => {
       if (user) {
         // Filter out password
         user.password = undefined;
-        res.status(200).send({ user });
+        res
+          .status(200)
+          .send({
+            username: user.username,
+            email: user.email,
+            role: user.role,
+          });
       }
     })
     .catch((err) => {
@@ -66,7 +76,13 @@ exports.updatePassword = (req, res) => {
       if (user) {
         // Filter out password
         user.password = undefined;
-        res.status(200).send({ user });
+        res
+          .status(200)
+          .send({
+            username: user.username,
+            email: user.email,
+            role: user.role,
+          });
       }
     })
     .catch((err) => {
