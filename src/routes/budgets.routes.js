@@ -1,5 +1,5 @@
 const {
-  getAllBudgets,
+  getBudgets,
   getBudget,
   createBudget,
   updateBudget,
@@ -13,7 +13,7 @@ const budgetRoutes = express.Router();
  * Routes for all budgets. Evaluates to `/budgets/`.
  */
 budgetRoutes
-  .get("/", verifyToken, getAllBudgets)
+  .get("/", verifyToken, getBudgets)
   .post("/", verifyToken, createBudget);
 
 /**

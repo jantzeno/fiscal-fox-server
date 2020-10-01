@@ -64,14 +64,11 @@ exports.login = (req, res) => {
       }
 
       // Generate token
-      var accessToken =
-        "Bearer" +
-        " " +
-        jwt.sign(
-          { id: user.id },
-          secret,
-          { expiresIn: 86400 } // 24 hours
-        );
+      var accessToken = jwt.sign(
+        { id: user.id },
+        secret,
+        { expiresIn: 86400 } // 24 hours
+      );
 
       // Respond
       res.status(200).send({

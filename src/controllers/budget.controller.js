@@ -1,10 +1,9 @@
 const { BudgetModel } = require("../sequelize/models/budget.model.js");
 const { validationResult } = require("express-validator");
 
-exports.getAllBudgets = (req, res) => {
+exports.getBudgets = (req, res) => {
   const msg = "Budget - Get All Budgets";
   console.log(msg);
-
   BudgetModel.findAll()
     .then((budgets) => {
       let budgetRes = [];

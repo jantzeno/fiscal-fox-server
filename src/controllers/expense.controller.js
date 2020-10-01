@@ -1,7 +1,7 @@
 const { ExpenseModel } = require("../sequelize/models/expense.model.js");
 const { validationResult } = require("express-validator");
 
-exports.getAllExpenses = (req, res) => {
+exports.getExpenses = (req, res) => {
   const msg = "Expense - Get All Expenses";
   console.log(msg);
 
@@ -28,7 +28,7 @@ exports.getAllExpenses = (req, res) => {
     });
 };
 
-exports.getAllExpensesByBudget = (req, res) => {
+exports.getExpensesByBudgetId = (req, res) => {
   const msg = "Expense - Get All Expenses By Budget";
   console.log(msg);
 
@@ -118,14 +118,12 @@ exports.updateExpense = (req, res) => {
   )
     .then((expense) => {
       if (expense) {
-        res
-          .status(200)
-          .send({
-            id: expense.id,
-            budgetId: expense.budget_id,
-            name: expense.name,
-            amount: expense.amount,
-          });
+        res.status(200).send({
+          id: expense.id,
+          budgetId: expense.budget_id,
+          name: expense.name,
+          amount: expense.amount,
+        });
       }
     })
     .catch((err) => {

@@ -1,6 +1,6 @@
 const {
-  getAllExpenses,
-  getAllExpensesByBudget,
+  getExpenses,
+  getExpensesByBudgetId,
   getExpense,
   createExpense,
   updateExpense,
@@ -14,9 +14,7 @@ const expenseRoutes = express.Router();
 /**
  * Routes for all expenses. Evaluates to `/expenses/`.
  */
-expenseRoutes
-  .get("/", verifyToken, getAllExpenses)
-  .post("/", verifyToken, createExpense);
+expenseRoutes.get("/", getExpenses).post("/", verifyToken, createExpense);
 
 /**
  * Routes for a expense by id. Evalutes to `/expenses/:expenseId`.
@@ -29,6 +27,6 @@ expenseRoutes
 /**
  * Routes for a expenses by budget id. Evalutes to `/expenses/budget/:budgetId`.
  */
-expenseRoutes.get("/budget/:budgetId", verifyToken, getAllExpensesByBudget);
+expenseRoutes.get("/budget/:budgetId", verifyToken, getExpensesByBudgetId);
 
 module.exports = expenseRoutes;
