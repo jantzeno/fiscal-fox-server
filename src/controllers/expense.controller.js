@@ -65,10 +65,12 @@ exports.getExpense = (req, res) => {
       .then((expense) => {
         if (expense) {
           res.status(200).send({
-            id: expense.id,
-            budgetId: expense.budget_id,
-            name: expense.name,
-            amount: expense.amount,
+            expense: {
+              id: expense.id,
+              budgetId: expense.budget_id,
+              name: expense.name,
+              amount: expense.amount,
+            },
           });
         } else {
           res.status(204).send({ expense: null });
@@ -90,10 +92,12 @@ exports.createExpense = (req, res) => {
     .then((expense) => {
       if (expense) {
         res.status(201).send({
-          id: expense.id,
-          budgetId: expense.budget_id,
-          name: expense.name,
-          amount: expense.amount,
+          expense: {
+            id: expense.id,
+            budgetId: expense.budget_id,
+            name: expense.name,
+            amount: expense.amount,
+          },
         });
       }
     })
@@ -119,10 +123,12 @@ exports.updateExpense = (req, res) => {
     .then((expense) => {
       if (expense) {
         res.status(200).send({
-          id: expense.id,
-          budgetId: expense.budget_id,
-          name: expense.name,
-          amount: expense.amount,
+          expense: {
+            id: expense.id,
+            budgetId: expense.budget_id,
+            name: expense.name,
+            amount: expense.amount,
+          },
         });
       }
     })

@@ -45,13 +45,13 @@ exports.updateUser = (req, res) => {
       if (user) {
         // Filter out password
         user.password = undefined;
-        res
-          .status(200)
-          .send({
+        res.status(200).send({
+          user: {
             username: user.username,
             email: user.email,
             role: user.role,
-          });
+          },
+        });
       }
     })
     .catch((err) => {
@@ -76,13 +76,13 @@ exports.updatePassword = (req, res) => {
       if (user) {
         // Filter out password
         user.password = undefined;
-        res
-          .status(200)
-          .send({
+        res.status(200).send({
+          user: {
             username: user.username,
             email: user.email,
             role: user.role,
-          });
+          },
+        });
       }
     })
     .catch((err) => {

@@ -34,9 +34,13 @@ exports.getBudget = (req, res) => {
     BudgetModel.findByPk(budgetId)
       .then((budget) => {
         if (budget) {
-          res
-            .status(200)
-            .send({ id: budget.id, name: budget.name, amount: budget.amount });
+          res.status(200).send({
+            budget: {
+              id: budget.id,
+              name: budget.name,
+              amount: budget.amount,
+            },
+          });
         } else {
           res.status(204).send({ budget: null });
         }
@@ -58,9 +62,13 @@ exports.createBudget = (req, res) => {
   })
     .then((budget) => {
       if (budget) {
-        res
-          .status(201)
-          .send({ id: budget.id, name: budget.name, amount: budget.amount });
+        res.status(201).send({
+          budget: {
+            id: budget.id,
+            name: budget.name,
+            amount: budget.amount,
+          },
+        });
       }
     })
     .catch((err) => {
@@ -84,9 +92,13 @@ exports.updateBudget = (req, res) => {
   )
     .then((budget) => {
       if (budget) {
-        res
-          .status(200)
-          .send({ id: budget.id, name: budget.name, amount: budget.amount });
+        res.status(200).send({
+          budget: {
+            id: budget.id,
+            name: budget.name,
+            amount: budget.amount,
+          },
+        });
       }
     })
     .catch((err) => {

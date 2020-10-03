@@ -7,10 +7,6 @@ var jwt = require("jsonwebtoken");
 
 exports.register = (req, res) => {
   console.log("Request - Register User");
-  // const validation = validationResult(req);
-  // if (!validation.isEmpty()) {
-  //   return res.status(422).json({ errors: validation.array() });
-  // }
   // Save User to Database
   UserModel.create({
     username: req.body.username,
@@ -21,7 +17,7 @@ exports.register = (req, res) => {
   })
     .then((user) => {
       if (user) {
-        res.status(201).send({ status: true });
+        res.status(201).send({ isRegistered: true });
       }
     })
     .catch((err) => {
