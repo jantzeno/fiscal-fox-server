@@ -3,7 +3,13 @@ const jwt = require("jsonwebtoken");
 
 exports.verifyToken = (req, res, next) => {
   // Trim 'Bearer ' from token
-  let token = req.get("Authorization").substring(7);
+  var token = undefined;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.split(" ")[0] === "Bearer"
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
   if (!token) {
     return res.status(403).send({
       isAuth: false,

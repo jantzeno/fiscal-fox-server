@@ -2,6 +2,7 @@ const {
   login,
   logout,
   register,
+  validateToken,
 } = require("../controllers/auth.controller.js");
 const {
   checkDuplicateEmail,
@@ -13,7 +14,7 @@ const { verifyToken } = require("../middleware/authJwt.middleware");
 
 const authRoutes = express.Router();
 
-authRoutes.post("/login", login);
+authRoutes.get("/login", verifyToken, validateToken).post("/login", login);
 authRoutes.get("/logout", verifyToken, logout);
 authRoutes.post(
   "/register",

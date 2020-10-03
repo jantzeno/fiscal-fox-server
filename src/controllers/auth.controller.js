@@ -72,15 +72,40 @@ exports.login = (req, res) => {
 
       // Respond
       res.status(200).send({
-        username: user.username,
-        email: user.email,
-        role: user.role,
         token: accessToken,
       });
     })
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
+};
+
+exports.validateToken = (req, res) => {
+  const errorMsg = "Invalid Request.";
+  console.log("Request - Validate Token");
+  console.log(req.userId);
+
+  if (req.userId) {
+    // Check for user
+    UserModel.findOne({
+      where: {
+        id: req.userId,
+      },
+    })
+      // Check user exists
+      .then((user) => {
+        if (!user) {
+          // If none was found, return generic error
+          return res.status(400).send({ message: errorMsg });
+        }
+
+        // Respond
+        res.status(200).send();
+      })
+      .catch((err) => {
+        res.status(400).send({ message: err.message });
+      });
+  }
 };
 
 exports.logout = function (req, res) {
