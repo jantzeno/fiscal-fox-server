@@ -8,7 +8,7 @@ exports.ExpenseModel = connection.define("expense", {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  budget_id: {
+  budgetId: {
     allowNull: false,
     type: DataTypes.INTEGER,
   },

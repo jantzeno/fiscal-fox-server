@@ -115,6 +115,7 @@ exports.deleteBudget = (req, res) => {
     },
   })
     .then((status) => {
+      console.log(status);
       res.status(200).send({ status });
     })
     .catch((err) => {

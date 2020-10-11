@@ -79,7 +79,6 @@ exports.login = (req, res) => {
 exports.validateToken = (req, res) => {
   const errorMsg = "Invalid Request.";
   console.log("Request - Validate Token");
-  console.log(req.userId);
 
   if (req.userId) {
     // Check for user
@@ -107,4 +106,5 @@ exports.validateToken = (req, res) => {
 exports.logout = function (req, res) {
   // Log the request
   console.log("Request - Logout");
+  res.status(200).send({ isAuth: false });
 };

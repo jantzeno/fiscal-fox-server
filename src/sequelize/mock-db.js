@@ -37,9 +37,9 @@ async function mock() {
   ]);
 
   await ExpenseModel.bulkCreate([
-    { name: "Software License", budget_id: 1, amount: 500 },
-    { name: "Copier Lease", budget_id: 1, amount: 200 },
-    { name: "Laptop Refresh", budget_id: 1, amount: 2000 },
+    { name: "Software License", budgetId: 1, amount: 500 },
+    { name: "Copier Lease", budgetId: 1, amount: 200 },
+    { name: "Laptop Refresh", budgetId: 1, amount: 2000 },
   ]);
 
   console.log("Done!");

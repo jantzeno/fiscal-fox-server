@@ -12,7 +12,7 @@ exports.getExpenses = (req, res) => {
         for (expense of expenses) {
           expenseRes.push({
             id: expense.id,
-            budgetId: expense.budget_id,
+            budgetId: expense.budgetId,
             name: expense.name,
             amount: expense.amount,
           });
@@ -33,7 +33,7 @@ exports.getExpensesByBudgetId = (req, res) => {
   console.log(msg);
 
   ExpenseModel.findAll({
-    where: { budget_id: Number(req.params.budgetId) },
+    where: { budgetId: Number(req.params.budgetId) },
   })
     .then((expenses) => {
       let expenseRes = [];
@@ -41,7 +41,7 @@ exports.getExpensesByBudgetId = (req, res) => {
         for (expense of expenses) {
           expenseRes.push({
             id: expense.id,
-            budgetId: expense.budget_id,
+            budgetId: expense.budgetId,
             name: expense.name,
             amount: expense.amount,
           });
@@ -67,7 +67,7 @@ exports.getExpense = (req, res) => {
           res.status(200).send({
             expense: {
               id: expense.id,
-              budgetId: expense.budget_id,
+              budgetId: expense.budgetId,
               name: expense.name,
               amount: expense.amount,
             },
@@ -87,6 +87,7 @@ exports.createExpense = (req, res) => {
   console.log(msg);
   ExpenseModel.create({
     name: req.body.name,
+    budgetId: req.body.budgetId,
     amount: req.body.amount,
   })
     .then((expense) => {
@@ -94,7 +95,7 @@ exports.createExpense = (req, res) => {
         res.status(201).send({
           expense: {
             id: expense.id,
-            budgetId: expense.budget_id,
+            budgetId: expense.budgetId,
             name: expense.name,
             amount: expense.amount,
           },
@@ -120,17 +121,19 @@ exports.updateExpense = (req, res) => {
       },
     }
   )
-    .then((expense) => {
-      if (expense) {
-        res.status(200).send({
-          expense: {
-            id: expense.id,
-            budgetId: expense.budget_id,
-            name: expense.name,
-            amount: expense.amount,
-          },
-        });
-      }
+    .then(() => {
+      ExpenseModel.findByPk(req.params.expenseId).then((expense) => {
+        if (expense) {
+          res.status(200).send({
+            expense: {
+              id: expense.id,
+              budgetId: expense.budgetId,
+              name: expense.name,
+              amount: expense.amount,
+            },
+          });
+        }
+      });
     })
     .catch((err) => {
       res.status(400).send({ message: err.message });
@@ -146,6 +149,7 @@ exports.deleteExpense = (req, res) => {
     },
   })
     .then((status) => {
+      console.log(status);
       res.status(200).send({ status });
     })
     .catch((err) => {
