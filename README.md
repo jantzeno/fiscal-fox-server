@@ -1,5 +1,9 @@
 # Fiscal Fox SQLite RESTful API
 
+## What is it?
+
+This is the backend to the [Fiscal-Fox](https://github.com/jantzeno/fiscal-fox) learning project. Fiscal-Fox is a budget and expense tracker project for learning the MEAN stack, mostly Angular and Node.js.
+
 ## Tested Using
 
 - Node.js, v14.8.0
@@ -36,8 +40,8 @@ brew install sqlite3
 
 ### First Time Running
 
-After you've cloned the project, run npm install to download the dependencies.
-Run npm start to run the server.
+After you've cloned the project, run `npm install` to download the dependencies.
+Run `npm run start` to start the server.
 
 ## Setup and Install
 
@@ -74,10 +78,10 @@ The setup.js file in the sequelize directory loads mock data into the database.
 
 ### Budget Analyst
 
-username: boggis
-pasword: farmer
+- username: boggis
+- password: farmer
 
 ### Program Manager
 
-username: mrfox
-password: incredible
+- username: mrfox
+- password: incredible
