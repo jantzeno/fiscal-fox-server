@@ -6,8 +6,8 @@ This is the backend to the [Fiscal-Fox](https://github.com/jantzeno/fiscal-fox) 
 
 ## Tested Using
 
-- Node.js, v14.8.0
-- npm, v6.14.7
+- Node.js, v14.14.0
+- npm, v6.14.8
 
 ## What You Will Need
 
