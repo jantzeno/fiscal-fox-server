@@ -12,9 +12,7 @@ const budgetRoutes = express.Router();
 /**
  * Routes for all budgets. Evaluates to `/budgets/`.
  */
-budgetRoutes
-  .get("/", verifyToken, getBudgets)
-  .post("/", verifyToken, createBudget);
+budgetRoutes.get("/", verifyToken, getBudgets).post("/", verifyToken, createBudget);
 
 /**
  * Routes for a budget by id. Evalutes to `/budgets/:budgetId`.

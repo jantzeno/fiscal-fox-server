@@ -6,25 +6,12 @@ This is the backend to the [Fiscal-Fox](https://github.com/jantzeno/fiscal-fox) 
 
 ## Tested Using
 
-- Node.js, v14.14.0
-- npm, v6.14.8
+- Node.js, v16.14.0
+- npm, v8.3.1
 
 ## What You Will Need
 
 1. SQLite3
-
-Ubuntu/Debian:
-
-```bash
-sudo apt install sqlite3
-```
-
-MacOS with Homebrew:
-
-```bash
-brew install sqlite3
-```
-
 2. Node.js
 3. npm
 
@@ -42,6 +29,7 @@ brew install sqlite3
 
 After you've cloned the project, run `npm install` to download the dependencies.
 Run `npm run start` to start the server.
+Run `export port=4200; npm start` to start server on e2e test port.
 
 ## Setup and Install
 
@@ -54,7 +42,7 @@ npm install
 2. (Optional) Load mock data into the database
 
 ```bash
-npm mock-db
+npm run mock-db
 ```
 
 3. Run server instance:
@@ -66,7 +54,7 @@ npm start
 4. (Optional) Clear the database tables
 
 ```bash
-npm reset-db
+npm run reset-db
 ```
 
 ## Schemas

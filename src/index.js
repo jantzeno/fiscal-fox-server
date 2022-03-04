@@ -6,6 +6,7 @@ const middleware = require("./middleware/errors.middleware.js");
 
 // Server Setup
 const app = express();
+// export port=[PORT]; npm run start
 const port = process.env.port || 3000;
 const logLevel = process.env.LOG_LEVEL || "dev";
 
