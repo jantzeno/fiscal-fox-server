@@ -1,7 +1,7 @@
-const { DataTypes } = require("sequelize");
-const { connection } = require("../../config/db.config.js");
+import { DataTypes } from "sequelize";
+import { connection } from "../../config/db.config.js";
 
-exports.BudgetModel = connection.define("budget", {
+export const BudgetModel = connection.define("budget", {
   id: {
     allowNull: false,
     autoIncrement: true,

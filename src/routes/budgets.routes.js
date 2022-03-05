@@ -1,14 +1,8 @@
-const {
-  getBudgets,
-  getBudget,
-  createBudget,
-  updateBudget,
-  deleteBudget,
-} = require("../controllers/budget.controller.js");
-const { verifyToken } = require("../middleware/authJwt.middleware");
-const express = require("express");
+import { getBudgets, getBudget, createBudget, updateBudget, deleteBudget } from "../controllers/budget.controller.js";
+import { verifyToken } from "../middleware/authJwt.middleware.js";
+import { Router } from "express";
 
-const budgetRoutes = express.Router();
+const budgetRoutes = Router();
 /**
  * Routes for all budgets. Evaluates to `/budgets/`.
  */
@@ -22,4 +16,4 @@ budgetRoutes
   .put("/:budgetId", verifyToken, updateBudget)
   .delete("/:budgetId", verifyToken, deleteBudget);
 
-module.exports = budgetRoutes;
+export default budgetRoutes;

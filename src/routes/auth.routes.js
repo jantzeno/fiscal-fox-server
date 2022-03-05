@@ -1,25 +1,13 @@
-const {
-  login,
-  logout,
-  register,
-  validateToken,
-} = require("../controllers/auth.controller.js");
-const {
-  checkDuplicateEmail,
-  checkDuplicateUserName,
-} = require("../middleware/register.middleware.js");
-const { check } = require("express-validator");
-const express = require("express");
-const { verifyToken } = require("../middleware/authJwt.middleware");
+import { login, logout, register, validateToken } from "../controllers/auth.controller.js";
+import { checkDuplicateEmail, checkDuplicateUserName } from "../middleware/register.middleware.js";
+import { check } from "express-validator";
+import { Router } from "express";
+import { verifyToken } from "../middleware/authJwt.middleware.js";
 
-const authRoutes = express.Router();
+const authRoutes = Router();
 
 authRoutes.get("/login", verifyToken, validateToken).post("/login", login);
 authRoutes.get("/logout", verifyToken, logout);
-authRoutes.post(
-  "/register",
-  [check("email").isEmail(), checkDuplicateUserName, checkDuplicateEmail],
-  register
-);
+authRoutes.post("/register", [check("email").isEmail(), checkDuplicateUserName, checkDuplicateEmail], register);
 
-module.exports = authRoutes;
+export default authRoutes;

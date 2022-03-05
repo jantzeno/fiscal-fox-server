@@ -1,1 +1,1 @@
-exports.secret = "this-is-not-a-secret";
+export const secret = "this-is-not-a-secret";

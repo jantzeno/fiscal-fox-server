@@ -1,8 +1,8 @@
 // Database
-const { connection } = require("../config/db.config.js");
-const { BudgetModel } = require("./models/budget.model.js");
-const { ExpenseModel } = require("./models/expense.model.js");
-const { UserModel } = require("./models/user.model.js");
+import { connection } from "../config/db.config.js";
+import { BudgetModel } from "./models/budget.model.js";
+import { ExpenseModel } from "./models/expense.model.js";
+import { UserModel } from "./models/user.model.js";
 
 async function reset() {
   // Drop Tables

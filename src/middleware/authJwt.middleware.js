@@ -1,13 +1,12 @@
-const { secret } = require("../config/auth.config.js");
-const jwt = require("jsonwebtoken");
+import { secret } from "../config/auth.config.js";
 
-exports.verifyToken = (req, res, next) => {
+import pkg from "jsonwebtoken";
+const { verify } = pkg;
+
+export function verifyToken(req, res, next) {
   // Trim 'Bearer ' from token
   var token = undefined;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.split(" ")[0] === "Bearer"
-  ) {
+  if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
@@ -16,7 +15,7 @@ exports.verifyToken = (req, res, next) => {
       message: "Error: No token provided.",
     });
   } else {
-    jwt.verify(token, secret, (err, decoded) => {
+    verify(token, secret, (err, decoded) => {
       if (err) {
         return res.status(500).send({
           isAuth: false,
@@ -27,4 +26,4 @@ exports.verifyToken = (req, res, next) => {
       next();
     });
   }
-};
+}

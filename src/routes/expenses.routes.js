@@ -1,16 +1,8 @@
-const {
-  getExpenses,
-  getExpensesByBudgetId,
-  getExpense,
-  createExpense,
-  updateExpense,
-  deleteExpense,
-} = require("../controllers/expense.controller.js");
-const { verifyToken } = require("../middleware/authJwt.middleware");
-const { check } = require("express-validator");
-const express = require("express");
+import { getExpenses, getExpensesByBudgetId, getExpense, createExpense, updateExpense, deleteExpense } from "../controllers/expense.controller.js";
+import { verifyToken } from "../middleware/authJwt.middleware.js";
+import { Router } from "express";
 
-const expenseRoutes = express.Router();
+const expenseRoutes = Router();
 /**
  * Routes for all expenses. Evaluates to `/expenses/`.
  */
@@ -29,4 +21,4 @@ expenseRoutes
  */
 expenseRoutes.get("/budget/:budgetId", verifyToken, getExpensesByBudgetId);
 
-module.exports = expenseRoutes;
+export default expenseRoutes;

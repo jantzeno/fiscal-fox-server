@@ -1,7 +1,7 @@
-const { UserModel } = require("../sequelize/models/user.model.js");
+import { UserModel } from "../sequelize/models/user.model.js";
 
-exports.checkDuplicateUserName = (req, res, next) => {
-  console.log("Check Username");
+export function checkDuplicateUserName(req, res, next) {
+  console.log("Register - Check Username");
   // -> Check for duplicate username
   UserModel.findOne({
     where: {
@@ -15,10 +15,10 @@ exports.checkDuplicateUserName = (req, res, next) => {
       next();
     }
   });
-};
+}
 
-exports.checkDuplicateEmail = (req, res, next) => {
-  console.log("Check Email");
+export function checkDuplicateEmail(req, res, next) {
+  console.log("Register - Check Email");
   // -> Check for duplicate email
   UserModel.findOne({
     where: {
@@ -32,4 +32,4 @@ exports.checkDuplicateEmail = (req, res, next) => {
       next();
     }
   });
-};
+}

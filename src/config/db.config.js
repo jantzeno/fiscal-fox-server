@@ -1,6 +1,6 @@
-const { Sequelize } = require("sequelize");
+import { Sequelize } from "sequelize";
 
-exports.connection = new Sequelize({
+export const connection = new Sequelize({
   dialect: "sqlite",
   // Path relative to project root
   storage: "database/fiscal-fox-database.sqlite",

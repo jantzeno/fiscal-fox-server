@@ -1,12 +1,13 @@
-const { UserModel } = require("../sequelize/models/user.model.js");
-const { validationResult } = require("express-validator");
-const { secret } = require("../config/auth.config.js");
-const bcrypt = require("bcrypt");
+import { UserModel } from "../sequelize/models/user.model.js";
+import { secret } from "../config/auth.config.js";
+import { compareSync } from "bcrypt";
 
-var jwt = require("jsonwebtoken");
+import pkg from "jsonwebtoken";
+const { sign } = pkg;
 
-exports.register = (req, res) => {
+export function register(req, res) {
   console.log("Request - Register User");
+  console.log("Register - User: " + req.body.username);
   // Save User to Database
   UserModel.create({
     username: req.body.username,
@@ -23,9 +24,9 @@ exports.register = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.login = (req, res) => {
+export function login(req, res) {
   const errorMsg = "Invalid Request.";
   console.log("Request - Login");
 
@@ -47,10 +48,7 @@ exports.login = (req, res) => {
       }
 
       //Check password
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+      var passwordIsValid = compareSync(req.body.password, user.password);
 
       if (!passwordIsValid) {
         res.status(401).send({
@@ -60,7 +58,7 @@ exports.login = (req, res) => {
       }
 
       // Generate token
-      var accessToken = jwt.sign(
+      var accessToken = sign(
         { id: user.id },
         secret,
         { expiresIn: 86400 } // 24 hours
@@ -74,9 +72,9 @@ exports.login = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.validateToken = (req, res) => {
+export function validateToken(req, res) {
   const errorMsg = "Invalid Request.";
   console.log("Request - Validate Token");
 
@@ -101,10 +99,10 @@ exports.validateToken = (req, res) => {
         res.status(400).send({ message: err.message });
       });
   }
-};
+}
 
-exports.logout = function (req, res) {
+export function logout(req, res) {
   // Log the request
   console.log("Request - Logout");
   res.status(200).send({ isAuth: false });
-};
+}

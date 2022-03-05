@@ -1,9 +1,9 @@
-const { connection } = require("../config/db.config.js");
-const { BudgetModel } = require("./models/budget.model.js");
-const { ExpenseModel } = require("./models/expense.model.js");
-const { UserModel } = require("./models/user.model.js");
+import { connection } from "../config/db.config.js";
+import { BudgetModel } from "./models/budget.model.js";
+import { ExpenseModel } from "./models/expense.model.js";
+import { UserModel } from "./models/user.model.js";
 
-const bcrypt = require("bcrypt");
+import { hashSync } from "bcrypt";
 const saltRounds = 10;
 
 async function mock() {
@@ -19,13 +19,13 @@ async function mock() {
   await UserModel.bulkCreate([
     {
       username: "mrfox",
-      password: bcrypt.hashSync("incredible", saltRounds),
+      password: hashSync("incredible", saltRounds),
       email: "mrfox@burrow.com",
       role: "PROGRAM_MANAGER",
     },
     {
       username: "boggis",
-      password: bcrypt.hashSync("farmer", saltRounds),
+      password: hashSync("farmer", saltRounds),
       email: "boggis@squabfarm.com",
       role: "BUDGET_ANALYST",
     },

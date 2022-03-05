@@ -1,15 +1,13 @@
-const { ExpenseModel } = require("../sequelize/models/expense.model.js");
-const { validationResult } = require("express-validator");
+import { ExpenseModel } from "../sequelize/models/expense.model.js";
 
-exports.getExpenses = (req, res) => {
+export function getExpenses(req, res) {
   const msg = "Expense - Get All Expenses";
   console.log(msg);
-
   ExpenseModel.findAll()
     .then((expenses) => {
       let expenseRes = [];
       if (expenses) {
-        for (expense of expenses) {
+        for (const expense of expenses) {
           expenseRes.push({
             id: expense.id,
             budgetId: expense.budgetId,
@@ -26,9 +24,9 @@ exports.getExpenses = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.getExpensesByBudgetId = (req, res) => {
+export function getExpensesByBudgetId(req, res) {
   const msg = "Expense - Get All Expenses By Budget";
   console.log(msg);
 
@@ -38,7 +36,7 @@ exports.getExpensesByBudgetId = (req, res) => {
     .then((expenses) => {
       let expenseRes = [];
       if (expenses) {
-        for (expense of expenses) {
+        for (const expense of expenses) {
           expenseRes.push({
             id: expense.id,
             budgetId: expense.budgetId,
@@ -54,9 +52,9 @@ exports.getExpensesByBudgetId = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.getExpense = (req, res) => {
+export function getExpense(req, res) {
   const msg = "Expense - Get Expense";
   console.log(msg);
   const expenseId = req.params.expenseId;
@@ -80,9 +78,9 @@ exports.getExpense = (req, res) => {
         res.status(400).send({ message: err.message });
       });
   }
-};
+}
 
-exports.createExpense = (req, res) => {
+export function createExpense(req, res) {
   const msg = "Expense - Create Expense";
   console.log(msg);
   ExpenseModel.create({
@@ -105,9 +103,9 @@ exports.createExpense = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.updateExpense = (req, res) => {
+export function updateExpense(req, res) {
   const msg = "Expense - Update Expense";
   console.log(msg);
   ExpenseModel.update(
@@ -138,9 +136,9 @@ exports.updateExpense = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.deleteExpense = (req, res) => {
+export function deleteExpense(req, res) {
   const msg = "Expense - Delete Expense";
   console.log(msg);
   ExpenseModel.destroy({
@@ -155,4 +153,4 @@ exports.deleteExpense = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}

@@ -1,8 +1,8 @@
 // Modules
-const express = require("express");
-const logger = require("morgan");
-const cors = require("cors");
-const middleware = require("./middleware/errors.middleware.js");
+import express, { urlencoded, json } from "express";
+import logger from "morgan";
+import cors from "cors";
+import { error404, error500 } from "./middleware/errors.middleware.js";
 
 // Server Setup
 const app = express();
@@ -11,10 +11,10 @@ const port = process.env.port || 3000;
 const logLevel = process.env.LOG_LEVEL || "dev";
 
 // Routes
-const authRoutes = require("./routes/auth.routes.js");
-const budgetsRoutes = require("./routes/budgets.routes.js");
-const expensesRoutes = require("./routes/expenses.routes.js");
-const userRoutes = require("./routes/users.routes.js");
+import authRoutes from "./routes/auth.routes.js";
+import budgetsRoutes from "./routes/budgets.routes.js";
+import expensesRoutes from "./routes/expenses.routes.js";
+import userRoutes from "./routes/users.routes.js";
 
 // Reset the database - Helpful to have during API testing
 // const { connection } = require("./config/db.config");
@@ -30,8 +30,8 @@ app.use(cors());
 app.use(logger(logLevel));
 
 // Parse incoming requests
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 // Handle Routes
 const BASE_URL = "/api";
@@ -41,8 +41,8 @@ app.use(`${BASE_URL}/expenses`, expensesRoutes);
 app.use(`${BASE_URL}/user`, userRoutes);
 
 // Handle Errors, 404 and 500
-app.use(middleware.error404);
-app.use(middleware.error500);
+app.use(error404);
+app.use(error500);
 
 // Start server and listen on port
 app.listen(port, function () {

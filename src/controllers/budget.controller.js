@@ -1,21 +1,19 @@
-const { BudgetModel } = require("../sequelize/models/budget.model.js");
-const { validationResult } = require("express-validator");
+import { BudgetModel } from "../sequelize/models/budget.model.js";
 
-exports.getBudgets = (req, res) => {
+export function getBudgets(req, res) {
   const msg = "Budget - Get All Budgets";
   console.log(msg);
   BudgetModel.findAll()
     .then((budgets) => {
       let budgetRes = [];
       if (budgets) {
-        for (budget of budgets) {
+        for (const budget of budgets) {
           budgetRes.push({
             id: budget.id,
             name: budget.name,
             amount: budget.amount,
           });
         }
-
         res.status(200).send({ budgets: budgetRes });
       } else {
         res.status(204).send({ budgets: [] });
@@ -24,9 +22,9 @@ exports.getBudgets = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.getBudget = (req, res) => {
+export function getBudget(req, res) {
   const msg = "Budget - Get Budget";
   console.log(msg);
   const budgetId = Number(req.params.budgetId);
@@ -51,9 +49,9 @@ exports.getBudget = (req, res) => {
   } else {
     res.status(400).send();
   }
-};
+}
 
-exports.createBudget = (req, res) => {
+export function createBudget(req, res) {
   const msg = "Budget - Create Budget";
   console.log(msg);
   BudgetModel.create({
@@ -74,9 +72,9 @@ exports.createBudget = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.updateBudget = (req, res) => {
+export function updateBudget(req, res) {
   const msg = "Budget - Update Budget";
   console.log(msg);
   BudgetModel.update(
@@ -104,9 +102,9 @@ exports.updateBudget = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.deleteBudget = (req, res) => {
+export function deleteBudget(req, res) {
   const msg = "Budget - Delete Budget";
   console.log(msg);
   BudgetModel.destroy({
@@ -121,4 +119,4 @@ exports.deleteBudget = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}

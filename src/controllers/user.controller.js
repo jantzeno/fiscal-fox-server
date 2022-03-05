@@ -1,7 +1,6 @@
-const { UserModel } = require("../sequelize/models/user.model.js");
-const { validationResult } = require("express-validator");
+import { UserModel } from "../sequelize/models/user.model.js";
 
-exports.getUser = (req, res) => {
+export function getUser(req, res) {
   const msg = "User - Get User";
   console.log(msg);
   const userId = Number(req.userId);
@@ -24,9 +23,9 @@ exports.getUser = (req, res) => {
         res.status(400).send({ message: err.message });
       });
   }
-};
+}
 
-exports.updateUser = (req, res) => {
+export function updateUser(req, res) {
   const msg = "User - Update User";
   console.log(msg);
   UserModel.update(
@@ -57,9 +56,9 @@ exports.updateUser = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.updatePassword = (req, res) => {
+export function updatePassword(req, res) {
   const msg = "User - Update Password";
   console.log(msg);
   UserModel.update(
@@ -88,9 +87,9 @@ exports.updatePassword = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}
 
-exports.deleteUser = (req, res) => {
+export function deleteUser(req, res) {
   const msg = "User - Delete User";
   console.log(msg);
   UserModel.destroy({
@@ -104,4 +103,4 @@ exports.deleteUser = (req, res) => {
     .catch((err) => {
       res.status(400).send({ message: err.message });
     });
-};
+}

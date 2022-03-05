@@ -1,9 +1,9 @@
-const { DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
+import { DataTypes } from "sequelize";
+import { hashSync, compareSync } from "bcrypt";
 const saltRounds = 10;
-const { connection } = require("../../config/db.config.js");
+import { connection } from "../../config/db.config.js";
 
-exports.UserModel = connection.define(
+export const UserModel = connection.define(
   "user",
   {
     id: {
@@ -40,13 +40,13 @@ exports.UserModel = connection.define(
     // Hash password before saving to database
     hooks: {
       beforeCreate: (user) => {
-        user.password = bcrypt.hashSync(user.password, saltRounds);
+        user.password = hashSync(user.password, saltRounds);
       },
     },
     // Helper to validate the password
     instanceMethods: {
       validPassword: function (password) {
-        return bcrypt.compareSync(password, this.password);
+        return compareSync(password, this.password);
       },
     },
   }
